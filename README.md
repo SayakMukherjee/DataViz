@@ -15,3 +15,6 @@ The project is hosted on GitHub pages and can be accessed [here](https://sayakmu
 - Run `npm install` to install depenedencies
 - Run it on development server `npm start`
   
+## Making changes to the deployment
+- After making changes in the code base push the changes on the master branch
+- To deploy run `npm run deploy`
