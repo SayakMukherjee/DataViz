@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const InfoSec = styled.div`
 color: #fff;
 padding: 160px 0;
-background: ${({ lightBg }) => (lightBg ? '#fff' : '#101522')};
+background: ${({ lightBg }) => (lightBg ? '#80847E' : '#252B2F')};
 `;
 
 export const InfoRow = styled.div`
@@ -41,7 +41,7 @@ padding-bottom: 60px;
 `;
 
 export const TopLine = styled.div`
-color: ${({lightTopLine}) => (lightTopLine ? '#a9b3c1': '#4B59F7')};
+color: ${({lightTopLine}) => (lightTopLine ? '#a9b3c1': '#252B2F')};
 font-size: 18px;
 line-height: 16px;
 letter-spacing: 1.4px;
@@ -52,7 +52,7 @@ export const Heading = styled.h1`
 margin-bottom: 24px;
 font-size: 48px;
 line-height: 1.1;
-color: ${({lightText}) => (lightText ? '#f7f8f8': '#1c2237')};
+color: ${({lightText}) => (lightText ? '#D99056': '#252B2F')};
 `;
 
 export const Subtitle = styled.p`
@@ -65,7 +65,7 @@ color: ${({lightTextDesc}) => (lightTextDesc ? '#a9b3c1': '#1c2237')};
 
 export const ImgWrapper = styled.div`
 max-width: 555px;
-display: flex;
+display: block;
 justify-content: ${({start}) => (start ? 'flex-start' : 'flex-end')};
 `;
 

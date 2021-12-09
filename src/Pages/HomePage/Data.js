@@ -1,37 +1,35 @@
+import { TestGraph, TestGraph2 } from '../../visualizations';
+
 export const heroObj = {
     vid: require('../../videos/heroImage.mp4'), 
-    headLine: 'ADVENTURE AWAITS', 
-    description: 'What are you waiting for?'
+    headLine: 'Climate Change', 
+    // eslint-disable-next-line no-multi-str
+    description: 'What is climate change? \
+                What are its effects? \
+                and What can we do? \
+                Lets find out.'
 };
 
 export const homeObj = {
-    primary: true,
     lightBg: false,
     imgStart: '', 
     lightTopLine: true, 
     lightTextDesc: true,
-    buttonLabel: 'Get Started', 
-    description: 'We help buisness owner blah blah',
-    headLine: 'Lead Generation Specialist', 
+    description: 'Global Temperature has risen by more than 1.5 degree',
+    headLine: 'Global Temperature', 
     lightText: true, 
-    topLine: 'Marketing Agency' ,
-    img: require('../../images/undraw_on_the_office_re_cxds.svg'),
-    alt: 'Image',
-    start: ''
+    topLine: 'Effects of Climate Change' ,
+    viz: TestGraph
 };
 
 export const homeObjTwo = {
-    primary: false,
-    lightBg: true,
+    lightBg: false,
     imgStart: 'start', 
-    lightTopLine: false, 
-    lightTextDesc: false,
-    buttonLabel: 'Get Started', 
-    description: 'We help buisness owner blah blah',
-    headLine: 'Lead Generation Specialist', 
-    lightText: false, 
-    topLine: 'Marketing Agency' ,
-    img: require('../../images/undraw_on_the_office_re_cxds.svg'),
-    alt: 'Image',
-    start: 'true'
+    lightTopLine: true, 
+    lightTextDesc: true,
+    description: 'Carbon Dioxode is the most significant Green House Gas',
+    headLine: 'Global Emmission', 
+    lightText: true, 
+    topLine: 'Causes of Climate Change' ,
+    viz: TestGraph2
 };

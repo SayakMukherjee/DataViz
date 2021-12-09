@@ -39,6 +39,7 @@ export const Subtitle = styled.p`
     margin-top: 8px;
     color: #fff;
     font-size: 32px;
+    text-align: center;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
     @media screen and (max-width: 768) {
