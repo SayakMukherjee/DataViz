@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/DataViz/static/js/main.bd6cf75c.chunk.js",
-    "main.js.map": "/DataViz/static/js/main.bd6cf75c.chunk.js.map",
+    "main.js": "/DataViz/static/js/main.70914589.chunk.js",
+    "main.js.map": "/DataViz/static/js/main.70914589.chunk.js.map",
     "runtime-main.js": "/DataViz/static/js/runtime-main.bac7ccbd.js",
     "runtime-main.js.map": "/DataViz/static/js/runtime-main.bac7ccbd.js.map",
     "static/js/2.c1992fbf.chunk.js": "/DataViz/static/js/2.c1992fbf.chunk.js",
@@ -17,6 +17,6 @@
   "entrypoints": [
     "static/js/runtime-main.bac7ccbd.js",
     "static/js/2.c1992fbf.chunk.js",
-    "static/js/main.bd6cf75c.chunk.js"
+    "static/js/main.70914589.chunk.js"
   ]
 }
