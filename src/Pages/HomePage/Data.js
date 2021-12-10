@@ -27,9 +27,9 @@ export const homeObjTwo = {
     imgStart: 'start', 
     lightTopLine: true, 
     lightTextDesc: true,
-    description: 'Carbon Dioxode is the most significant Green House Gas',
-    headLine: 'Global Emmission', 
+    description: 'The plot alongside shows how the number of diasters have increased in all the countries along the globe ',
+    headLine: 'Natural Disasters ', 
     lightText: true, 
-    topLine: 'Causes of Climate Change' ,
+    topLine: 'Devastating impacts' ,
     viz: TestGraph2
 };
