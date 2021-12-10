@@ -32,73 +32,96 @@ const TestGraph = () => {
                 .attr("transform",
                     `translate(${margin.left}, ${margin.top})`);
 
-        d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv")
-        .then((data) => {
-            // Add X axis
-            const x = d3.scaleLinear()
-                .domain([0, 3000])
-                .range([ 0, width ]);
+        
 
-            svg.append("g")
-                .attr("transform", `translate(0, ${height})`)
-                .call(d3.axisBottom(x));
 
-            // Add Y axis
-            const y = d3.scaleLinear()
-                .domain([0, 400000])
-                .range([ height, 0]);
+                    //Read the data
+d3.csv("https://raw.githubusercontent.com/cashenkes/Data-Visualization-14/main/Temperature_change_cleaned_part.csv?token=ACJFLPBK5LYJFFZF2XRRT43BXCDHI",
 
-            svg.append("g")
-                .call(d3.axisLeft(y));
+// When reading the csv, I must format variables:
+d => {
+    return {Day : d3.timeParse("%Y")(d.Day), temperature_anomaly : d.temperature_anomaly}}).then(
 
-            // Add a tooltip div. Here I define the general feature of the tooltip: stuff that do not depend on the data point.
-            // Its opacity is set to 0: we don't see it by default.
-            const tooltip = d3.select("#my_dataviz")
-                .append("div")
-                .style("opacity", 1)
-                .style("background-color", "white")
-                .style("position", "absolute")
-                .style("color", "black")
+// Now I can use this dataset:
+function(data) {
 
-            // A function that change this tooltip when the user hover a point.
-            // Its opacity is set to 1: we can now see it. Plus it set the text and position of tooltip depending on the datapoint (d)
-            const mouseover = function(event, d) {
-                tooltip
-                .style("opacity", 1)
-            }
+  // Add X axis --> it is a date format
+  const x = d3.scaleTime()
+    .domain(d3.extent(data, d => d.Day))
+    .range([ 0, width ]);
+  svg.append("g")
+    .attr("transform", `translate(0, ${height})`)
+    .call(d3.axisBottom(x));
 
-            const mousemove = function(event, d) {
-                tooltip
-                .html(`The exact value of<br>the Ground Living area is: ${d.GrLivArea}`)
-                .style("left", (event.pageX) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-                .style("top", (event.pageY) + "px");
-            }
+  // Add Y axis
+  const y = d3.scaleLinear()
+    .domain( [-0.5,1.5])
+    .range([ height, 0 ]);
+  svg.append("g")
+    .call(d3.axisLeft(y));
 
-            // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
-            const mouseleave = function(event,d) {
-                tooltip
-                .transition()
-                .duration(200)
-                .style("opacity", 0)
-            }
+  // Add the line
+  svg.append("path")
+    .datum(data)
+    .attr("fill", "none")
+    .attr("stroke", "white")
+    .attr("stroke-width", 1.5)
+    .attr("d", d3.line()
+      .x(d => x(d.Day))
+      .y(d => y(d.temperature_anomaly))
+      )
 
-            // Add dots
-            svg.append('g')
-                .selectAll("dot")
-                .data(data.filter(function(d,i){return i<50})) // the .filter part is just to keep a few dots on the chart, not all of them
-                .enter()
-                .append("circle")
-                .attr("cx", function (d) { return x(d.GrLivArea); } )
-                .attr("cy", function (d) { return y(d.SalePrice); } )
-                .attr("r", 7)
-                .style("fill", "#69b3a2")
-                .style("opacity", 0.3)
-                .style("stroke", "white")
-                .style("position", "fixed")
-                .style("z-index", -1)
-                .on("mouseover", mouseover )
-                .on("mousemove", mousemove )
-                .on("mouseout", mouseleave )
+  // create a tooltip
+  const Tooltip = d3.select("#my_dataviz")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "5px")
+    .style("padding", "5px")
+    .style("position", "absolute")
+    .style("color", "black")
+
+
+    // Three function that change the tooltip when user hover / move / leave a cell
+    const mouseover = function(event,d) {
+      Tooltip
+        .style("opacity", 1)
+    }
+    const mousemove = function(event,d) {
+      Tooltip
+        .html("Year: "+ d.Day.getFullYear() + "<br>Temperature " + (Math.round(d.temperature_anomaly*100))/100)
+        .style("left", (event.pageX) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+        .style("top", (event.pageY) + "px");
+    }
+    const mouseleave = function(event,d) {
+      Tooltip
+        .style("opacity", 0)
+    }
+
+    
+
+  // Add the points
+  svg
+    .append("g")
+    .selectAll("dot")
+    .data(data)
+    .join("circle")
+      .attr("class", "myCircle")
+      .attr("cx", d => x(d.Day))
+      .attr("cy", d => y(d.temperature_anomaly))
+      .attr("r", 2)
+      .attr("stroke", "#69b3a2")
+      .attr("stroke-width", 2)
+      .attr("fill", "#69b3a2")
+      .on("mouseover", mouseover)
+      .on("mousemove", mousemove)
+      .on("mouseleave", mouseleave)
+
+
+
                     
             });
     }, []);
