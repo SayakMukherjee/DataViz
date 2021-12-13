@@ -1,5 +1,5 @@
 import React from 'react'
-import { heroObj, homeObj, homeObjTwo } from './Data'
+import { heroObj, homeObj, homeObjThree, homeObjTwo } from './Data'
 import { 
   HeroSection, 
   InfoSection, 
@@ -13,7 +13,7 @@ const Home = () => {
           <InfoSection {...homeObj} />
           <CardSection/>
           <InfoSection {...homeObjTwo} />
-          
+          <InfoSection {...homeObjThree} />
           <Footer/>
         </>
     )

@@ -1,4 +1,4 @@
-import { TestGraph, TestGraph2 } from '../../visualizations';
+import { TestGraph, TestGraph2, EmissionGraph } from '../../visualizations';
 
 export const heroObj = {
     vid: require('../../videos/heroImage.mp4'), 
@@ -32,4 +32,16 @@ export const homeObjTwo = {
     lightText: true, 
     topLine: 'Devastating impacts' ,
     viz: TestGraph2
+};
+
+export const homeObjThree = {
+    lightBg: false,
+    imgStart: '', 
+    lightTopLine: true, 
+    lightTextDesc: true,
+    description: 'co2 emissions per year',
+    headLine: 'emissions', 
+    lightText: true, 
+    topLine: 'Why the climate is changing' ,
+    viz: EmissionGraph
 };
