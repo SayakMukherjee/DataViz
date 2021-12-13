@@ -106,11 +106,8 @@ const EmissionGraph = () => {
                     })
                   }
                 });
-                console.log(total)
                 return total;
             }
-
-            console.log(dataPerYear)
 
             const years = []
             for(var i = 0; i < dataPerYear.length; i++) {
@@ -146,8 +143,6 @@ const EmissionGraph = () => {
                 .attr('x', function(d) { return xScale(d[0]); })
                 .attr('y', function(d) { return yScale(emYear(d[0])); })
                 .attr("fill", "white")
-
-            console.log(emYear("2020"))
         });
     }, []);
     return ( <Wrapper id="my_dataviz"></Wrapper> );
