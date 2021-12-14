@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import * as d3 from "d3";
 import styled from 'styled-components';
 
+const link = "https://raw.githubusercontent.com/cashenkes/Data-Visualization-14/main/co2-em.csv?token=AC4QHJRH7YZZU2WCTTOUU4TBYHVNK"
 
 const Wrapper = styled.div`
     height: 100%;
@@ -21,14 +22,14 @@ const EmissionGraph = () => {
         const width = 500 - margin.left - margin.right;
         const height = 460 - margin.top - margin.bottom;
 
-        const svg = d3.select('#my_dataviz')
+        const svg = d3.select('#co2emission')
             .append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom +10)
             .append("g")
                 .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-        d3.csv("https://raw.githubusercontent.com/cashenkes/Data-Visualization-14/main/co2-em.csv?token=AC4QHJWYWKLKWPAV6ZNNT53BYCC74", d => { 
+        d3.csv(link, d => { 
           return {
             iso_code : d.iso_code,
             country : d.country,
@@ -90,6 +91,7 @@ const EmissionGraph = () => {
             energy_per_gdp : d.energy_per_gdp
           }
         }).then( function(fullData) {
+            if(!fullData) {console.log("ERROR")}
             const minYear = 1800;
             const maxYear = 2020;
             const data = fullData.filter(function(d) {return d.year >= minYear});
@@ -117,6 +119,14 @@ const EmissionGraph = () => {
             const xAxis = svg.append("g")
               .attr("transform", `translate(0, ${height})`)
               .call(d3.axisBottom(xScale));
+
+            // Add X axis label:
+            svg.append("text")
+              .attr("text-anchor", "end")
+              .attr("x", width + 15)
+              .attr("y", height + margin.top + 25)
+              .attr("fill", "white")
+              .text("Year");
             
             // Add Y axis
             const yScale = d3.scaleLinear()
@@ -124,6 +134,15 @@ const EmissionGraph = () => {
               .range([ height, 0]);
             svg.append("g")
               .call(d3.axisLeft(yScale));
+
+            // Y axis label:
+            svg.append("text")
+              .attr("text-anchor", "end")
+              .attr("y", -margin.left+66)
+              .attr("x", -margin.top+70)
+              .attr("font-size", 11)
+              .text("* 10E+9 kg")
+              .attr("fill", "white")
 
             const clip = svg.append("defs").append("svg:clipPath")
               .attr("id", "clip")
@@ -196,6 +215,6 @@ const EmissionGraph = () => {
               })
         });
     }, []);
-    return ( <Wrapper id="my_dataviz"></Wrapper> );
+    return ( <Wrapper id="co2emission"></Wrapper> );
 };
 export default EmissionGraph;

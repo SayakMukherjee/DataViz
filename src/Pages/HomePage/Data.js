@@ -39,8 +39,9 @@ export const homeObjThree = {
     imgStart: '', 
     lightTopLine: true, 
     lightTextDesc: true,
-    description: 'co2 emissions per year',
-    headLine: 'emissions', 
+    description: "It is well known that the increase in greenhouse gasses has led to climate change. This plot, showing the annual global emissions of carbon dioxide (CO2), measured in million tonnes," 
+    + "shows the amount of CO2 that has been released in the atmosphere over the years.",
+    headLine: "CO2", 
     lightText: true, 
     topLine: 'Why the climate is changing' ,
     viz: EmissionGraph
