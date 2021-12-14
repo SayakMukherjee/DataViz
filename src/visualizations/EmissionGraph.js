@@ -32,6 +32,7 @@ const EmissionGraph = () => {
             iso_code : d.iso_code,
             country : d.country,
             year : d.year,
+            //year : d3.timeParse("%Y")(d.year),
             co2 : d.co2,
             co2_per_capita : d.co2_per_capita,
             trade_co2 : d.trade_co2,
@@ -89,9 +90,11 @@ const EmissionGraph = () => {
             energy_per_gdp : d.energy_per_gdp
           }
         }).then( function(fullData) {
-            const minYear = 1990;
+            const minYear = 1800;
+            const maxYear = 2020;
             const data = fullData.filter(function(d) {return d.year >= minYear});
-            var dataPerYear = d3.groups(data, d => d.year)
+            console.log(data)
+            var dataPerYear = d3.groups(data, d => d.year).sort(function(a, b) {return b[0] - a[0]})
 
             function emYear(year) {
                 var total = 0;
@@ -100,31 +103,31 @@ const EmissionGraph = () => {
                 //});
 
                 dataPerYear.forEach(e => {
-                  if(e[0] == year) {
+                  if(e[0] === year) {
                     e[1].forEach(e2 => {
                       if(!isNaN(e2.co2)) {total += Number(e2.co2)}
                     })
                   }
                 });
+                console.log(total)
                 return total;
             }
-
+            /*
             const years = []
             for(var i = 0; i < dataPerYear.length; i++) {
               years[i] = minYear + i + "";
-            }
+            }*/
 
             // X axis
-            const xScale = d3.scaleBand()
-              .range([ 0,width])
-              .domain(years)
-              .padding(0.1);
+            const xScale = d3.scaleTime()
+              .domain([d3.timeParse("%Y")(minYear), d3.timeParse("%Y")(maxYear)])
+              .range([0, width])
             svg.append("g")
               .attr("transform", `translate(0, ${height})`)
               //.attr("transform", `rotate(90)`)
               .call(d3.axisBottom(xScale))
-                .selectAll("text")
-                .attr("transform", "translate(13,20)rotate(90)");
+                //.selectAll("text")
+                //.attr("transform", "translate(13,20)rotate(90)");
             
             // Add Y axis
             const yScale = d3.scaleLinear()
@@ -134,6 +137,7 @@ const EmissionGraph = () => {
               .call(d3.axisLeft(yScale));
             
             // Bars
+            /*
             svg.selectAll(".mybar")
               .data(dataPerYear)
               .enter().append("rect")
@@ -142,7 +146,17 @@ const EmissionGraph = () => {
                 .attr('height', function(d) { return height - yScale(emYear(d[0])); })
                 .attr('x', function(d) { return xScale(d[0]); })
                 .attr('y', function(d) { return yScale(emYear(d[0])); })
-                .attr("fill", "white")
+                .attr("fill", "white")*/
+
+            svg.append("path")
+              .datum(dataPerYear)
+              .attr("fill", "none")
+              .attr("stroke", "white")
+              .attr("stroke-width", 1.5)
+              .attr("d", d3.line()
+                .x((d) => xScale(d3.timeParse("%Y")(d[0])))
+                .y((d) => yScale(emYear(d[0])))
+              )
         });
     }, []);
     return ( <Wrapper id="my_dataviz"></Wrapper> );
