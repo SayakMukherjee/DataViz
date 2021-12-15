@@ -13,12 +13,23 @@ const Home = () => {
           <HeroSection {...heroObj}/>
           <InfoSection {...homeObj} />
           <CardSection/>
-          <InfoSection {...homeObjTwo} />
+          <GraphSection {...homeObjTwo} />
           <GraphSection {...homeObjThree} />
           <InfoSection {...emissionObj} />
           <Footer/>
         </>
-    )
+    )/*
+  return (
+    <>
+      <HeroSection {...heroObj} />
+      <InfoSection {...homeObj} />
+      <CardSection />
+      <GraphSection {...homeObjTwo} />
+      <GraphSection {...homeObjThree} />
+      <Footer />
+    </>
+  )*/
+
 }
 
 export default Home
