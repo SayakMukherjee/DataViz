@@ -25,8 +25,6 @@ const CardSectiom = () =>  {
               text='Droughts have become a regular phenomenon'
               path='/'
             />
-          </CardsItems>
-          <CardsItems>
             <CardItems
               src={require('../../images/forest-fire.jpg')}
               text='Forst fires are raging through the amazons'

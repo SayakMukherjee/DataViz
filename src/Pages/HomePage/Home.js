@@ -1,10 +1,11 @@
 import React from 'react'
-import { heroObj, homeObj, homeObjThree, homeObjTwo } from './Data'
+import { heroObj, homeObj, homeObjThree, homeObjTwo, emissionObj} from './Data'
 import { 
   HeroSection, 
   InfoSection, 
-  CardSection,
-  Footer } from '../../components';
+  Footer,
+  GraphSection,
+  CardSection } from '../../components';
 
 const Home = () => {
     return (
@@ -13,7 +14,8 @@ const Home = () => {
           <InfoSection {...homeObj} />
           <CardSection/>
           <InfoSection {...homeObjTwo} />
-          <InfoSection {...homeObjThree} />
+          <GraphSection {...homeObjThree} />
+          <InfoSection {...emissionObj} />
           <Footer/>
         </>
     )
