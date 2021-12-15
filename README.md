@@ -16,5 +16,7 @@ The project is hosted on GitHub pages and can be accessed [here](https://sayakmu
 - Run it on development server `npm start`
   
 ## Making changes to the deployment
-- After making changes in the code base push the changes on the master branch
+- Before making changes to the code base make a new branch
+- Make your changes in that branch and push that to the github
+- After verifying that the changes are good make a pull request on the github
 - To deploy run `npm run deploy`
