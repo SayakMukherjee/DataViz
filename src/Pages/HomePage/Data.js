@@ -1,4 +1,5 @@
-import { TestGraph, TestGraph2, SankeyGraph, TestGraph3 } from '../../visualizations';
+
+import { TestGraph, TestGraph2, SankeyGraph, TestGraph3, EmissionGraph } from '../../visualizations';
 
 export const heroObj = {
     vid: require('../../videos/heroImage.mp4'),
@@ -33,6 +34,19 @@ export const homeObjTwo = {
     topLine: 'Devastating impacts',
     viz: TestGraph2
 };
+
+export const emissionObj = {
+    lightBg: false,
+    imgStart: '', 
+    lightTopLine: true, 
+    lightTextDesc: true,
+    description: "It is well known that the increase in greenhouse gasses has led to climate change. This plot, showing the annual global emissions of carbon dioxide (CO2), measured in million tonnes," 
+    + "shows the amount of CO2 that has been released in the atmosphere over the years.",
+    headLine: "CO2", 
+    lightText: true, 
+    topLine: 'Why the climate is changing' ,
+    viz: EmissionGraph
+}
 
 export const homeObjThree = {
     lightBg: false,

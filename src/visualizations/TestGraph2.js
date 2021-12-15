@@ -69,7 +69,7 @@ Promise.all([
     var tooltip = d3.select('#my_dataviz').append("div")
         .style("opacity", 0)
         .attr("class", "tooltip")
-        .style("background-color", "white")
+        .style("background-color", "#58656D")
         .style("border", "solid")
         .style("border-width", "1px")
         .style("border-radius", "5px")
