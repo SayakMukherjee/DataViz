@@ -9,6 +9,7 @@ import {
     Heading,
     Subtitle,
     VizWrapper,
+    AddData,
 } from './GraphSection.elements';
 
 const GraphSection = ({
@@ -20,7 +21,8 @@ const GraphSection = ({
     headLine,
     lightText,
     topLine,
-    viz
+    viz,
+    additional
 }) => {
     return (
         <>
@@ -34,6 +36,9 @@ const GraphSection = ({
                         <VizWrapper>
                             {viz()}
                         </VizWrapper>
+                        <TextWrapper>
+                                <AddData lightTextDesc={lightTextDesc}>{additional}</AddData>
+                        </TextWrapper>
                 </Container>
             </InfoSec>
         </>

@@ -50,3 +50,12 @@ font-size: 18px;
 line-height: 24px;
 color: ${({lightTextDesc}) => (lightTextDesc ? '#a9b3c1': '#1c2237')};
 `;
+
+export const AddData = styled.p`
+max-width: 100%;
+margin-bottom: 35px;
+font-size: 10px;
+line-height: 24px;
+text-align: right;
+color: ${({lightTextDesc}) => (lightTextDesc ? '#a9b3c1': '#1c2237')};
+`;

@@ -7,7 +7,7 @@ export const heroObj = {
     // eslint-disable-next-line no-multi-str
     description: 'What is climate change? \
                 What are its effects? \
-                and What can we do? \
+                What can we do? \
                 Lets find out.'
 };
 
@@ -16,10 +16,10 @@ export const homeObj = {
     imgStart: '',
     lightTopLine: true,
     lightTextDesc: true,
-    description: 'Global Temperature has risen by more than 1.5 degree',
-    headLine: 'Global Temperature',
+    description: "Earth's temperature is increasing alarmingly year by year. The graph alongside shows deviation per year from the 1951 - 1980 mean. We can clearly see an increasing trend which is a topic of grave concern. Earth's temperature has already increased by 1°C and its impact is very serious and devastating. ",
+    headLine: 'Global Warming',
     lightText: true,
-    topLine: 'Effects of Climate Change',
+    topLine: 'What is Climate Change?',
     viz: TestGraph
 };
 
@@ -28,23 +28,24 @@ export const homeObjTwo = {
     imgStart: 'start',
     lightTopLine: true,
     lightTextDesc: true,
-    description: 'The plot alongside shows how the number of diasters have increased in all the countries along the globe ',
-    headLine: 'Natural Disasters ',
+    description: 'Changes in the climate conditions have affected the likelihoof of disasters significantly. The plot below shows a dramatic rise in the number of catastrophic natural disasters across different parts of the world.  ',
+    headLine: 'Never Ending Natural Disasters ',
     lightText: true,
-    topLine: 'Devastating impacts',
-    viz: TestGraph2
+    topLine: '',
+    viz: TestGraph2,
+    additional: "*Countries whose disaster data was not available have been deleted from the graph"
 };
 
 export const emissionObj = {
-    lightBg: false,
-    imgStart: '',
-    lightTopLine: true,
-    lightTextDesc: true,
-    description: "It is well known that the increase in greenhouse gasses has led to climate change. This plot, showing the annual global emissions of carbon dioxide (CO2), measured in million tonnes,"
-        + "shows the amount of CO2 that has been released in the atmosphere over the years.",
-    headLine: "CO2",
-    lightText: true,
-    topLine: 'Why the climate is changing',
+    lightBg: true,
+    imgStart: '', 
+    lightTopLine: false, 
+    lightTextDesc: false,
+    description: "It is well known that the increase in greenhouse gasses has led to climate change. This plot, showing the annual global emissions of carbon dioxide (CO2), measured in million tonnes," 
+    + "shows the amount of CO2 that has been released in the atmosphere over the years.",
+    headLine: "CO2", 
+    lightText: false, 
+    topLine: 'Why the climate is changing' ,
     viz: EmissionGraph
 }
 

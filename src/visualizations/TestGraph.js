@@ -36,7 +36,7 @@ const TestGraph = () => {
 
 
                     //Read the data
-d3.csv("https://raw.githubusercontent.com/cashenkes/Data-Visualization-14/main/Temperature_change_cleaned_part.csv?token=ACJFLPBK5LYJFFZF2XRRT43BXCDHI",
+d3.csv("https://raw.githubusercontent.com/cashenkes/Data-Visualization-14/main/Temperature_change_cleaned_part.csv",
 
 // When reading the csv, I must format variables:
 d => {

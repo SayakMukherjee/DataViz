@@ -14,9 +14,10 @@ const Home = () => {
           <InfoSection {...homeObj} />
           <CardSection/>
           <GraphSection {...homeObjTwo} />
-          <GraphSection {...homeObjThree} />
           <InfoSection {...emissionObj} />
           <InfoSection {...streamObj} />
+          <GraphSection {...homeObjThree} />
+          
           <Footer/>
         </>
     )/*

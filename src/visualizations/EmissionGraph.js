@@ -12,7 +12,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: inset 0 0 0 1000px #252B2F;
+    box-shadow: inset 0 0 0 1000px #80847E;
     object-fit: contain;
     padding: 2px;
 `;
@@ -196,29 +196,47 @@ const EmissionGraph = () => {
         .attr("transform", `translate(0, ${height})`)
         .call(d3.axisBottom(xScale));
 
-      // Add X axis label:
-      svg.append("text")
-        .attr("text-anchor", "end")
-        .attr("x", width + 15)
-        .attr("y", height + margin.top + 25)
-        .attr("fill", "white")
-        .text("Year");
+            // X axis
+            const xScale = d3.scaleTime()
+              .domain([d3.timeParse("%Y")(minYear), d3.timeParse("%Y")(maxYear)])
+              .range([0, width])
+            const xAxis = svg.append("g")
+              .attr("transform", `translate(0, ${height})`)
+              .call(d3.axisBottom(xScale))
+              .attr("color","#252B2F")
+              .attr("stroke", "#252B2F")
+              .attr("stroke-width", 1);
 
-      // Add Y axis
-      const yScale = d3.scaleLinear()
-        .domain([0, 130000])
-        .range([height, 0]);
-      svg.append("g")
-        .call(d3.axisLeft(yScale));
+            // Add X axis label:
+            svg.append("text")
+              .attr("text-anchor", "end")
+              .attr("x", width + 15)
+              .attr("y", height + margin.top + 25)
+              .attr("fill", "#252B2F")
+              .text("Year")
+              .attr("stroke", "#252B2F")
+              .attr("stroke-width", 1);
+            
+            // Add Y axis
+            const yScale = d3.scaleLinear()
+              .domain([0, 130000])
+              .range([ height, 0]);
+            svg.append("g")
+              .call(d3.axisLeft(yScale))
+              .attr("color","#252B2F" )
+              .attr("stroke", "#252B2F")
+              .attr("stroke-width", 1);
 
-      // Y axis label:
-      svg.append("text")
-        .attr("text-anchor", "end")
-        .attr("y", -margin.left + 66)
-        .attr("x", -margin.top + 73)
-        .attr("font-size", 11)
-        .text("* 10E+9 kg")
-        .attr("fill", "white")
+            // Y axis label:
+            svg.append("text")
+              .attr("text-anchor", "end")
+              .attr("y", -margin.left+66)
+              .attr("x", -margin.top+73)
+              .attr("font-size", 11)
+              .text("* 10E+9 kg")
+              .attr("fill", "#252B2F")
+              .attr("stroke", "#252B2F")
+              .attr("stroke-width", 1);
 
       const clip = svg.append("defs").append("svg:clipPath")
         .attr("id", "clip")
@@ -232,19 +250,20 @@ const EmissionGraph = () => {
         .extent([[0, 0], [width, height]])
         .on("end", update)
 
+
       const line = svg.append('g')
         .attr("clip-path", "url(#clip)")
-
-      line.append("path")
-        .datum(emissionData[currentgraph])
-        .attr("class", "line")
-        .attr("fill", "none")
-        .attr("stroke", "white")
-        .attr("stroke-width", 1.4)
-        .attr("d", d3.line()
-          .x((d) => xScale(d3.timeParse("%Y")(d[0])))
-          .y((d) => yScale(d[1]))
-        )
+      
+            line.append("path")
+              .datum(emissionData[currentgraph])
+              .attr("class", "line")
+              .attr("fill", "none")
+              .attr("stroke", "#22B2F")
+              .attr("stroke-width", 2)
+              .attr("d", d3.line()
+                .x((d) => xScale(d3.timeParse("%Y")(d[0])))
+                .y((d) => yScale(d[1]))
+              )
 
       line
         .append("g")
