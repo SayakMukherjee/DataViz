@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+//import { Button } from 'react-native'
 import * as d3 from "d3";
 import styled from 'styled-components';
 
@@ -91,26 +92,82 @@ const EmissionGraph = () => {
             energy_per_gdp : d.energy_per_gdp
           }
         }).then( function(fullData) {
-            if(!fullData) {console.log("ERROR")}
             const minYear = 1800;
             const maxYear = 2020;
             const data = fullData.filter(function(d) {return d.year >= minYear});
-            //console.log(data)
             var dataPerYear = d3.groups(data, d => d.year).sort(function(a, b) {return b[0] - a[0]})
 
-            function emYear(year) {
-                var total = 0;
-                dataPerYear.forEach(e => {
-                  if(e[0] === year) {
-                    e[1].forEach(e2 => {
-                      if(!isNaN(e2.co2)) {total += Number(e2.co2)}
-                    })
-                  }
-                });
-                //console.log(total)
-                return total;
+            function emYear(year, mode) {
+              var total = 0;
+              dataPerYear.forEach(e => {
+                if(e[0] == year) {
+                  e[1].forEach(e2 => {
+                    if(mode == "total") {
+                      if(!isNaN(e2.co2)) {total += Number(e2.co2) + Number(e2.trade_co2)}
+                    }
+                    else if(mode == "coal") 
+                    {
+                      if(!isNaN(e2.coal_co2)) {total += Number(e2.coal_co2)}
+                    }
+                    else if(mode == "gas") 
+                    {
+                      if(!isNaN(e2.gas_co2)) {total += Number(e2.gas_co2)}
+                    }
+                    else if(mode == "oil") 
+                    {
+                      if(!isNaN(e2.oil_co2)) {total += Number(e2.oil_co2)}
+                    }
+                    else 
+                    {
+                      if(!isNaN(e2.other_industry_co2)) {total += Number(e2.other_industry_co2)}
+                    }
+                  })
+                }
+              });
+              return total;
+            }
+            var currentgraph = 0;
+
+            const emissionData = 
+            [ annualEmission(minYear, maxYear, dataPerYear, "total"),
+            annualEmission(minYear, maxYear, dataPerYear, "coal"),
+            annualEmission(minYear, maxYear, dataPerYear, "gas"),
+            annualEmission(minYear, maxYear, dataPerYear, "oil") ];
+
+            function annualEmission(min, max, data, mode) {
+              const result  = []
+              for(var i = 0; i <= max-min; i++) {
+                result[i] = [i+min, emYear(i+Number(min), mode)]
+              }
+              return result;
             }
 
+            const selectOptions = ["total", "coal", "gas", "oil"];
+            d3.select("#selectButton")
+              .selectAll('myOptions')
+              .data(selectOptions)
+              .enter()
+              .append('option')
+              .text(function (d) { return d; })
+              .attr("value", function (d) { return d; })
+
+            function updateGraph(option) {
+              console.log("hello! " + option);
+              if(option == selectOptions[0]) {currentgraph = 0;}
+              if(option == selectOptions[1]) {currentgraph = 1;}
+              if(option == selectOptions[2]) {currentgraph = 2;}
+              if(option == selectOptions[3]) {currentgraph = 3;}
+              console.log(currentgraph);
+              line
+                .selectAll('.line')
+                .datum(emissionData[currentgraph])
+                .transition()
+                .duration(1000)
+                .attr("d", d3.line()
+                  .x((d) => xScale(d3.timeParse("%Y")(d[0])))
+                  .y((d) => yScale(d[1]))
+              )
+            }
 
             // X axis
             const xScale = d3.scaleTime()
@@ -139,7 +196,7 @@ const EmissionGraph = () => {
             svg.append("text")
               .attr("text-anchor", "end")
               .attr("y", -margin.left+66)
-              .attr("x", -margin.top+70)
+              .attr("x", -margin.top+73)
               .attr("font-size", 11)
               .text("* 10E+9 kg")
               .attr("fill", "white")
@@ -153,21 +210,21 @@ const EmissionGraph = () => {
               .attr("y", 0);
   
             const brush = d3.brushX()
-              .extent( [ [0,0], [width,height] ] )  // selects whole graph
-              .on("end", update)               // calls update function
+              .extent( [ [0,0], [width,height] ] )
+              .on("end", update)
 
             const line = svg.append('g')
               .attr("clip-path", "url(#clip)")
 
             line.append("path")
-              .datum(dataPerYear)
+              .datum(emissionData[currentgraph])
               .attr("class", "line")
               .attr("fill", "none")
               .attr("stroke", "white")
               .attr("stroke-width", 1.4)
               .attr("d", d3.line()
                 .x((d) => xScale(d3.timeParse("%Y")(d[0])))
-                .y((d) => yScale(emYear(d[0])))
+                .y((d) => yScale(d[1]))
               )
 
               line
@@ -197,24 +254,31 @@ const EmissionGraph = () => {
                     .duration(1000)
                     .attr("d", d3.line()
                       .x((d) => xScale(d3.timeParse("%Y")(d[0])))
-                      .y((d) => yScale(emYear(d[0])))
+                      .y((d) => yScale(d[1]))
                     )
               }
           
               // resets the graph if the user doubleclicks
               svg.on("dblclick",function(){
                 xScale.domain([d3.timeParse("%Y")(minYear), d3.timeParse("%Y")(maxYear)])
-                xAxis.transition().call(d3.axisBottom(xScale))
                 line
                   .selectAll('.line')
                   .transition()
                   .attr("d", d3.line()
                     .x((d) => xScale(d3.timeParse("%Y")(d[0])))
-                    .y((d) => yScale(emYear(d[0])))
+                    .y((d) => yScale(d[1]))
                 )
+                xAxis.transition().call(d3.axisBottom(xScale))
               })
+              // When the button is changed, run the updateChart function
+              d3.select("#selectButton").on("change", function(d) {
+              // recover the option that has been chosen
+              var selectedOption = d3.select(this).property("value")
+              // run the updateChart function with this selected option
+              updateGraph(selectedOption);
+  })
         });
     }, []);
-    return ( <Wrapper id="co2emission"></Wrapper> );
+    return ( <Wrapper id="co2emission"><select id="selectButton"></select></Wrapper> );
 };
 export default EmissionGraph;
