@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/DataViz/static/js/main.620a76bb.chunk.js",
-    "main.js.map": "/DataViz/static/js/main.620a76bb.chunk.js.map",
+    "main.js": "/DataViz/static/js/main.e1cec554.chunk.js",
+    "main.js.map": "/DataViz/static/js/main.e1cec554.chunk.js.map",
     "runtime-main.js": "/DataViz/static/js/runtime-main.bac7ccbd.js",
     "runtime-main.js.map": "/DataViz/static/js/runtime-main.bac7ccbd.js.map",
-    "static/js/2.e796b687.chunk.js": "/DataViz/static/js/2.e796b687.chunk.js",
-    "static/js/2.e796b687.chunk.js.map": "/DataViz/static/js/2.e796b687.chunk.js.map",
+    "static/js/2.f9a3f674.chunk.js": "/DataViz/static/js/2.f9a3f674.chunk.js",
+    "static/js/2.f9a3f674.chunk.js.map": "/DataViz/static/js/2.f9a3f674.chunk.js.map",
     "index.html": "/DataViz/index.html",
-    "static/js/2.e796b687.chunk.js.LICENSE.txt": "/DataViz/static/js/2.e796b687.chunk.js.LICENSE.txt",
+    "static/js/2.f9a3f674.chunk.js.LICENSE.txt": "/DataViz/static/js/2.f9a3f674.chunk.js.LICENSE.txt",
     "static/media/drought.jpg": "/DataViz/static/media/drought.f09050d6.jpg",
     "static/media/floods.jpg": "/DataViz/static/media/floods.97248d07.jpg",
     "static/media/forest-fire.jpg": "/DataViz/static/media/forest-fire.8d85e1a5.jpg",
@@ -16,7 +16,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.bac7ccbd.js",
-    "static/js/2.e796b687.chunk.js",
-    "static/js/main.620a76bb.chunk.js"
+    "static/js/2.f9a3f674.chunk.js",
+    "static/js/main.e1cec554.chunk.js"
   ]
 }
