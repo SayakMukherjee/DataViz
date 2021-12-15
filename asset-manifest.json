@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.js": "/DataViz/static/js/main.70914589.chunk.js",
-    "main.js.map": "/DataViz/static/js/main.70914589.chunk.js.map",
+    "main.js": "/DataViz/static/js/main.620a76bb.chunk.js",
+    "main.js.map": "/DataViz/static/js/main.620a76bb.chunk.js.map",
     "runtime-main.js": "/DataViz/static/js/runtime-main.bac7ccbd.js",
     "runtime-main.js.map": "/DataViz/static/js/runtime-main.bac7ccbd.js.map",
-    "static/js/2.c1992fbf.chunk.js": "/DataViz/static/js/2.c1992fbf.chunk.js",
-    "static/js/2.c1992fbf.chunk.js.map": "/DataViz/static/js/2.c1992fbf.chunk.js.map",
+    "static/js/2.e796b687.chunk.js": "/DataViz/static/js/2.e796b687.chunk.js",
+    "static/js/2.e796b687.chunk.js.map": "/DataViz/static/js/2.e796b687.chunk.js.map",
     "index.html": "/DataViz/index.html",
-    "static/js/2.c1992fbf.chunk.js.LICENSE.txt": "/DataViz/static/js/2.c1992fbf.chunk.js.LICENSE.txt",
-    "static/media/drought.jpg": "/DataViz/static/media/drought.72c80803.jpg",
-    "static/media/floods.jpg": "/DataViz/static/media/floods.4ec08e12.jpg",
-    "static/media/forest-fire.jpg": "/DataViz/static/media/forest-fire.795e36d9.jpg",
+    "static/js/2.e796b687.chunk.js.LICENSE.txt": "/DataViz/static/js/2.e796b687.chunk.js.LICENSE.txt",
+    "static/media/drought.jpg": "/DataViz/static/media/drought.f09050d6.jpg",
+    "static/media/floods.jpg": "/DataViz/static/media/floods.97248d07.jpg",
+    "static/media/forest-fire.jpg": "/DataViz/static/media/forest-fire.8d85e1a5.jpg",
     "static/media/heroImage.mp4": "/DataViz/static/media/heroImage.4272cdb0.mp4",
-    "static/media/melting.jpg": "/DataViz/static/media/melting.7b7a4592.jpg"
+    "static/media/melting.jpg": "/DataViz/static/media/melting.f10df119.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.bac7ccbd.js",
-    "static/js/2.c1992fbf.chunk.js",
-    "static/js/main.70914589.chunk.js"
+    "static/js/2.e796b687.chunk.js",
+    "static/js/main.620a76bb.chunk.js"
   ]
 }
