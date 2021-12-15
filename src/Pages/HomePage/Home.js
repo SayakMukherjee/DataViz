@@ -1,5 +1,5 @@
 import React from 'react'
-import { heroObj, homeObj, homeObjThree, homeObjTwo, emissionObj} from './Data'
+import { heroObj, homeObj, homeObjThree, homeObjTwo, emissionObj, streamObj} from './Data'
 import { 
   HeroSection, 
   InfoSection, 
@@ -15,6 +15,7 @@ const Home = () => {
           <CardSection/>
           <GraphSection {...homeObjTwo} />
           <InfoSection {...emissionObj} />
+          <InfoSection {...streamObj} />
           <GraphSection {...homeObjThree} />
           
           <Footer/>
