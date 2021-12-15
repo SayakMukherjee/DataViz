@@ -21,17 +21,17 @@ const Select = styled.select`
   width: 20%;
   height: 35px;
   background: #252B2F;
-  color: #D99056;
+  color: #80847E;
   padding-left: 5px;
   font-size: 14px;
   border-left: none;
   border-top:none;
   border-right:none;
-  border-color: #D99056;
+  border-color: #80847E;
   margin-left: 10px;
 
   option {
-    color: #D99056;
+    color: #80847E;
     background: #252B2F;
     display: flex;
     white-space: pre;
@@ -194,49 +194,41 @@ const EmissionGraph = () => {
         .range([0, width])
       const xAxis = svg.append("g")
         .attr("transform", `translate(0, ${height})`)
-        .call(d3.axisBottom(xScale));
+        .call(d3.axisBottom(xScale))
+        .attr("color", "#252B2F")
+        .attr("stroke", "#252B2F")
+        .attr("stroke-width", 1);
 
-            // X axis
-            const xScale = d3.scaleTime()
-              .domain([d3.timeParse("%Y")(minYear), d3.timeParse("%Y")(maxYear)])
-              .range([0, width])
-            const xAxis = svg.append("g")
-              .attr("transform", `translate(0, ${height})`)
-              .call(d3.axisBottom(xScale))
-              .attr("color","#252B2F")
-              .attr("stroke", "#252B2F")
-              .attr("stroke-width", 1);
+      // Add X axis label:
+      svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", width + 15)
+        .attr("y", height + margin.top + 25)
+        .attr("fill", "#252B2F")
+        .text("Year")
+        .attr("stroke", "#252B2F")
+        .attr("stroke-width", 1);
 
-            // Add X axis label:
-            svg.append("text")
-              .attr("text-anchor", "end")
-              .attr("x", width + 15)
-              .attr("y", height + margin.top + 25)
-              .attr("fill", "#252B2F")
-              .text("Year")
-              .attr("stroke", "#252B2F")
-              .attr("stroke-width", 1);
-            
-            // Add Y axis
-            const yScale = d3.scaleLinear()
-              .domain([0, 130000])
-              .range([ height, 0]);
-            svg.append("g")
-              .call(d3.axisLeft(yScale))
-              .attr("color","#252B2F" )
-              .attr("stroke", "#252B2F")
-              .attr("stroke-width", 1);
+      // Add Y axis
+      const yScale = d3.scaleLinear()
+        .domain([0, 130000])
+        .range([height, 0]);
+      svg.append("g")
+        .call(d3.axisLeft(yScale))
+        .attr("color", "#252B2F")
+        .attr("stroke", "#252B2F")
+        .attr("stroke-width", 1);
 
-            // Y axis label:
-            svg.append("text")
-              .attr("text-anchor", "end")
-              .attr("y", -margin.left+66)
-              .attr("x", -margin.top+73)
-              .attr("font-size", 11)
-              .text("* 10E+9 kg")
-              .attr("fill", "#252B2F")
-              .attr("stroke", "#252B2F")
-              .attr("stroke-width", 1);
+      // Y axis label:
+      svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("y", -margin.left + 66)
+        .attr("x", -margin.top + 73)
+        .attr("font-size", 11)
+        .text("* 10E+9 kg")
+        .attr("fill", "#252B2F")
+        .attr("stroke", "#252B2F")
+        .attr("stroke-width", 1);
 
       const clip = svg.append("defs").append("svg:clipPath")
         .attr("id", "clip")
@@ -253,17 +245,17 @@ const EmissionGraph = () => {
 
       const line = svg.append('g')
         .attr("clip-path", "url(#clip)")
-      
-            line.append("path")
-              .datum(emissionData[currentgraph])
-              .attr("class", "line")
-              .attr("fill", "none")
-              .attr("stroke", "#22B2F")
-              .attr("stroke-width", 2)
-              .attr("d", d3.line()
-                .x((d) => xScale(d3.timeParse("%Y")(d[0])))
-                .y((d) => yScale(d[1]))
-              )
+
+      line.append("path")
+        .datum(emissionData[currentgraph])
+        .attr("class", "line")
+        .attr("fill", "none")
+        .attr("stroke", "#252B2F")
+        .attr("stroke-width", 2)
+        .attr("d", d3.line()
+          .x((d) => xScale(d3.timeParse("%Y")(d[0])))
+          .y((d) => yScale(d[1]))
+        )
 
       line
         .append("g")
