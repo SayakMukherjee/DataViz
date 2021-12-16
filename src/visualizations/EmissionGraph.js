@@ -1,12 +1,14 @@
 /**
-This file is for plotting the line graph
-*
-Reference: https://www.d3-graph-gallery.com/
- */
+* This file plots a linegraph representing global co2 emission per year.
+* Inspiration for the base setup of a linechart using d3 was taken from :  https://www.d3-graph-gallery.com/line.html
+*/
 import React, { useEffect } from 'react';
 import * as d3 from "d3";
 import styled from 'styled-components';
 
+// the resource where the dataset is located.
+// A link to the datasource can be found here :                             https://github.com/owid/co2-data
+// A codebook containing explanation for the dataset can be found here :    https://github.com/owid/co2-data/blob/master/owid-co2-codebook.csv
 const link = "https://raw.githubusercontent.com/cashenkes/Data-Visualization-14/main/co2-em.csv"
 
 const Wrapper = styled.div`
@@ -57,138 +59,28 @@ const EmissionGraph = () => {
       .append("g")
       .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-    d3.csv(link, d => {
-      return {
-        iso_code: d.iso_code,
-        country: d.country,
-        year: d.year,
-        co2: d.co2,
-        co2_per_capita: d.co2_per_capita,
-        trade_co2: d.trade_co2,
-        cement_co2: d.cement_co2,
-        cement_co2_per_capita: d.cement_co2_per_capita,
-        coal_co2: d.coal_co2,
-        coal_co2_per_capita: d.coal_co2_per_capita,
-        flaring_co2: d.flaring_co2,
-        flaring_co2_per_capita: d.flaring_co2_per_capita,
-        gas_co2: d.gas_co2,
-        gas_co2_per_capita: d.gas_co2_per_capita,
-        oil_co2: d.oil_co2,
-        oil_co2_per_capita: d.oil_co2_per_capital,
-        other_industry_co2: d.other_industry_co2,
-        other_co2_per_capita: d.other_co2_per_capita,
-        co2_growth_prct: d.co2_growth_prct,
-        co2_growth_abs: d.co2_growth_abs,
-        co2_per_gdp: d.co2_per_gdp,
-        co2_per_unit_energy: d.co2_per_unit_energy,
-        consumption_co2: d.consumption_co2,
-        consumption_co2_per_capita: d.consumption_co2_per_capita,
-        consumption_co2_per_gdp: d.consumption_co2_per_gdp,
-        cumulative_co2: d.cumulative_co2,
-        cumulative_cement_co2: d.cumulative_cement_co2,
-        cumulative_coal_co2: d.cumulative_coal_co2,
-        cumulative_flaring_co2: d.cumulative_flaring_co2,
-        cumulative_gas_co2: d.cumulative_gas_co2,
-        cumulative_oil_co2: d.cumulative_oil_co2,
-        cumulative_other_co2: d.cumulative_other_co2,
-        trade_co2_share: d.trade_co2_share,
-        share_global_co2: d.share_global_co2,
-        share_global_cement_co2: d.share_global_cement_co2,
-        share_global_coal_co2: d.share_global_coal_co2,
-        share_global_flaring_co2: d.share_global_flaring_co2,
-        share_global_gas_co2: d.share_global_gas_co2,
-        share_global_oil_co2: d.share_global_oil_co2,
-        share_global_other_co2: d.share_global_other_co2,
-        share_global_cumulative_co2: d.share_global_cumulative_co2,
-        share_global_cumulative_cement_co2: d.share_global_cumulative_cement_co2,
-        share_global_cumulative_coal_co2: d.share_global_cumulative_coal_co2,
-        share_global_cumulative_flaring_co2: d.share_global_cumulative_flaring_co2,
-        share_global_cumulative_gas_co2: d.share_global_cumulative_gas_co2,
-        share_global_cumulative_oil_co2: d.share_global_cumulative_oil_co2,
-        share_global_cumulative_other_co2: d.share_global_cumulative_other_co2,
-        total_ghg: d.total_ghg,
-        ghg_per_capita: d.ghg_per_capita,
-        methane: d.methane,
-        methane_per_capita: d.methane_per_capita,
-        nitrous_oxide: d.nitrous_oxide,
-        nitrous_oxide_per_capita: d.nitrous_oxide_per_capita,
-        population: d.population,
-        gdp: d.gdp,
-        primary_energy_consumption: d.primary_energy_consumption,
-        energy_per_capita: d.energy_per_capita,
-        energy_per_gdp: d.energy_per_gdp
-      }
-    }).then(function (fullData) {
-      const minYear = 1800;
-      const maxYear = 2020;
-      const data = fullData.filter(function (d) { return d.year >= minYear });
-      var dataPerYear = d3.groups(data, d => d.year).sort(function (a, b) { return b[0] - a[0] })
+    d3.csv(link, d => dataProcess(d)).then(function (fullData) {
+      /*
+      * This section defines constants and preprocessed data.
+      */ 
 
-      function emYear(year, mode) {
-        var total = 0;
-        dataPerYear.forEach(e => {
-          if (e[0] == year) {
-            e[1].forEach(e2 => {
-              if (mode == "total") {
-                if (!isNaN(e2.co2)) { total += Number(e2.co2) + Number(e2.trade_co2) }
-              }
-              else if (mode == "coal") {
-                if (!isNaN(e2.coal_co2)) { total += Number(e2.coal_co2) }
-              }
-              else if (mode == "gas") {
-                if (!isNaN(e2.gas_co2)) { total += Number(e2.gas_co2) }
-              }
-              else if (mode == "oil") {
-                if (!isNaN(e2.oil_co2)) { total += Number(e2.oil_co2) }
-              }
-              else {
-                if (!isNaN(e2.other_industry_co2)) { total += Number(e2.other_industry_co2) }
-              }
-            })
-          }
-        });
-        return total;
-      }
+      // Set the minimum and maximum year for easier processing.
+      const minYear = 1820;                                                                         // minimum year is set to 1820 since there is not a lot of data available before then.
+      const maxYear = 2020;                                                                         // no data available after 2020.
+      const data = fullData.filter(function (d) { return d.year >= minYear });                      // filters the data based on the minimum year.
+      var dataPerYear = d3.groups(data, d => d.year).sort(function (a, b) { return b[0] - a[0] })   // groups the data per year so calculations can be done.
       var currentgraph = 0;
 
+      // Precalculates all the datasets for the different graphs such that it only has to be calculated once.
       const emissionData =
-        [annualEmission(minYear, maxYear, dataPerYear, "total"),
-        annualEmission(minYear, maxYear, dataPerYear, "coal"),
-        annualEmission(minYear, maxYear, dataPerYear, "gas"),
-        annualEmission(minYear, maxYear, dataPerYear, "oil")];
+        [ annualEmission(minYear, maxYear, "total")
+        , annualEmission(minYear, maxYear, "coal")
+        , annualEmission(minYear, maxYear, "gas")
+        , annualEmission(minYear, maxYear, "oil") ];
 
-      function annualEmission(min, max, data, mode) {
-        const result = []
-        for (var i = 0; i <= max - min; i++) {
-          result[i] = [i + min, emYear(i + Number(min), mode)]
-        }
-        return result;
-      }
-
-      const selectOptions = ["total", "coal", "gas", "oil"];
-      d3.select("#selectButton")
-        .selectAll('myOptions')
-        .data(selectOptions)
-        .enter()
-        .append('option')
-        .text(function (d) { return d; })
-        .attr("value", function (d) { return d; })
-
-      function updateGraph(option) {
-        if (option == selectOptions[0]) { currentgraph = 0; }
-        if (option == selectOptions[1]) { currentgraph = 1; }
-        if (option == selectOptions[2]) { currentgraph = 2; }
-        if (option == selectOptions[3]) { currentgraph = 3; }
-        line
-          .selectAll('.line')
-          .datum(emissionData[currentgraph])
-          .transition()
-          .duration(1000)
-          .attr("d", d3.line()
-            .x((d) => xScale(d3.timeParse("%Y")(d[0])))
-            .y((d) => yScale(d[1]))
-          )
-      }
+      /*
+      * This sections adds the axis of the graph.
+      */
 
       // X axis
       const xScale = d3.scaleTime()
@@ -224,7 +116,8 @@ const EmissionGraph = () => {
         .text("* 10E+9 kg")
         .attr("fill", "#fff");
 
-      const clip = svg.append("defs").append("svg:clipPath")
+      // Adds the clip to the svg.
+      svg.append("defs").append("svg:clipPath")
         .attr("id", "clip")
         .append("svg:rect")
         .attr("width", width)
@@ -232,77 +125,186 @@ const EmissionGraph = () => {
         .attr("x", 0)
         .attr("y", 0);
 
+      // Defines the brush.
       const brush = d3.brushX()
         .extent([[0, 0], [width, height]])
-        .on("end", update)
+        .on("end", zoom)
 
-
+      /*
+      * This sections draws the initial graph and adds the constants used for clipping and brushing
+      */ 
       const line = svg.append('g')
-        .attr("clip-path", "url(#clip)")
-
+        .attr("clip-path", "url(#clip)")                // Adds the clip so the area outside the clip will not be drawn.
       line.append("path")
-        .datum(emissionData[currentgraph])
+        .datum(emissionData[currentgraph])              // Setting the standard data.
         .attr("class", "line")
         .attr("fill", "none")
         .attr("stroke", "#D99056")
         .attr("stroke-width", 2)
         .attr("d", d3.line()
-          .x((d) => xScale(d3.timeParse("%Y")(d[0])))
-          .y((d) => yScale(d[1]))
-        )
-
+          .x((d) => xScale(d3.timeParse("%Y")(d[0])))   // Parses the data (string) to a date so it can be used in the timeScale.
+          .y((d) => yScale(d[1])))                      // Translates the data (number) to a value in the linearScale.
       line
         .append("g")
-        .attr("class", "brush")
+        .attr("class", "brush")                         // Adds the brush for zooming in and out.
         .call(brush);
 
-      let idleTimeout
-      function idled() { idleTimeout = null; }
+      /*
+      * This section adds selectbutton and the doubleclick event handler.
+      */
+      
+      // Adds the options to the dropdown menu.
+      const selectOptions = ["total", "coal", "gas", "oil"];
+      d3.select("#selectButton")
+      .selectAll('myOptions')
+      .data(selectOptions)
+      .enter()
+      .append('option')
+      .text(function (d) { return d; })
+      .attr("value", function (d) { return d; })
+              
+      // resets the graph if the user doubleclicks
+      svg.on("dblclick", function () {draw("none", [d3.timeParse("%Y")(minYear), d3.timeParse("%Y")(maxYear)])})        // Resets the zoom if the user doubleclicks.
+      d3.select("#selectButton").on("change", function (d) { draw(d3.select(this).property("value"), xScale.domain); }) // When a different option is selected draw that graph at this zoom level.
 
-      // handles updating the region of the graph
-      function update(event, d) {
-        const extent = event.selection
+      /*
+      * This section contains helper functions.
+      */
 
-        if (!extent) {
-          if (!idleTimeout) return idleTimeout = setTimeout(idled, 350);
-          xScale.domain([4, 8])
-        } else {
-          xScale.domain([xScale.invert(extent[0]), xScale.invert(extent[1])])
-          line.select(".brush").call(brush.move, null) // This remove the brush area as soon as the user is done
+      // Redraws the graph with a given option and domain.
+      function draw(option, domain) {
+        if (option === selectOptions[0]) { currentgraph = 0; }
+        else if (option === selectOptions[1]) { currentgraph = 1; }
+        else if (option === selectOptions[2]) { currentgraph = 2; }
+        else if (option === selectOptions[3]) { currentgraph = 3; }
+        if (xScale.domain !== domain) {
+          xScale.domain(domain);
+          xAxis.transition().duration(500).call(d3.axisBottom(xScale));
         }
-
-        xAxis.transition().duration(1000).call(d3.axisBottom(xScale))
-        line
-          .selectAll('.line')
+        line.selectAll('.line')
+          .datum(emissionData[currentgraph])
           .transition()
-          .duration(1000)
+          .duration(500)
           .attr("d", d3.line()
             .x((d) => xScale(d3.timeParse("%Y")(d[0])))
             .y((d) => yScale(d[1]))
           )
       }
 
-      // resets the graph if the user doubleclicks
-      svg.on("dblclick", function () {
-        xScale.domain([d3.timeParse("%Y")(minYear), d3.timeParse("%Y")(maxYear)])
-        line
-          .selectAll('.line')
-          .transition()
-          .attr("d", d3.line()
-            .x((d) => xScale(d3.timeParse("%Y")(d[0])))
-            .y((d) => yScale(d[1]))
-          )
-        xAxis.transition().call(d3.axisBottom(xScale))
-      })
-      // When the button is changed, run the updateChart function
-      d3.select("#selectButton").on("change", function (d) {
-        // recover the option that has been chosen
-        var selectedOption = d3.select(this).property("value")
-        // run the updateChart function with this selected option
-        updateGraph(selectedOption);
-      })
+      // Handles zooming in on the graph.
+      function zoom(event) {
+        const extent = event.selection
+        if (extent) {
+          line.select(".brush").call(brush.move, null)                          // Remove the brush area when the user is done.
+          draw("none", [xScale.invert(extent[0]), xScale.invert(extent[1])]);   // Redraw the graph within the newly selected area
+        }
+        
+      }
+      
+      // Precalculates the data for the graphs with the helperfunction bellow.
+      function annualEmission(min, max, mode) {
+        const result = []
+        for (var i = 0; i <= max - min; i++) {
+          result[i] = [i + min, emYear(i + Number(min), mode)]
+        }
+        return result;
+      }
+
+      // Takes a year (number) and a statistic as input and calculates the global emited co2 that year for the given statistic.
+      function emYear(year, statistic) {
+        var total = 0;
+        dataPerYear.forEach(e => {
+          if (e[0] == year) {
+            e[1].forEach(e2 => {
+              switch (statistic) {
+                case "total" :
+                  total += Number(e2.co2) + Number(e2.trade_co2)
+                  break;
+                case "coal" :
+                  total += Number(e2.coal_co2)
+                  break;
+                case "gas" :
+                  total += Number(e2.gas_co2)
+                  break;
+                case "oil" :
+                  total += Number(e2.oil_co2)
+                  break;
+                default :
+                  break;
+              }
+            })
+          }
+        })
+        return total;
+      }
     });
   }, []);
+  // wraps the graph in a wrapper and adds the selectbutton.
   return (<Wrapper id="co2emission"><Select id="selectButton"></Select></Wrapper>);
 };
+// Exports the graph so it can be drawn.
 export default EmissionGraph;
+
+// Used when reading the data.
+function dataProcess(d) {
+  return {
+    iso_code: d.iso_code,
+    country: d.country,
+    year: d.year,
+    co2: d.co2,
+    co2_per_capita: d.co2_per_capita,
+    trade_co2: d.trade_co2,
+    cement_co2: d.cement_co2,
+    cement_co2_per_capita: d.cement_co2_per_capita,
+    coal_co2: d.coal_co2,
+    coal_co2_per_capita: d.coal_co2_per_capita,
+    flaring_co2: d.flaring_co2,
+    flaring_co2_per_capita: d.flaring_co2_per_capita,
+    gas_co2: d.gas_co2,
+    gas_co2_per_capita: d.gas_co2_per_capita,
+    oil_co2: d.oil_co2,
+    oil_co2_per_capita: d.oil_co2_per_capital,
+    other_industry_co2: d.other_industry_co2,
+    other_co2_per_capita: d.other_co2_per_capita,
+    co2_growth_prct: d.co2_growth_prct,
+    co2_growth_abs: d.co2_growth_abs,
+    co2_per_gdp: d.co2_per_gdp,
+    co2_per_unit_energy: d.co2_per_unit_energy,
+    consumption_co2: d.consumption_co2,
+    consumption_co2_per_capita: d.consumption_co2_per_capita,
+    consumption_co2_per_gdp: d.consumption_co2_per_gdp,
+    cumulative_co2: d.cumulative_co2,
+    cumulative_cement_co2: d.cumulative_cement_co2,
+    cumulative_coal_co2: d.cumulative_coal_co2,
+    cumulative_flaring_co2: d.cumulative_flaring_co2,
+    cumulative_gas_co2: d.cumulative_gas_co2,
+    cumulative_oil_co2: d.cumulative_oil_co2,
+    cumulative_other_co2: d.cumulative_other_co2,
+    trade_co2_share: d.trade_co2_share,
+    share_global_co2: d.share_global_co2,
+    share_global_cement_co2: d.share_global_cement_co2,
+    share_global_coal_co2: d.share_global_coal_co2,
+    share_global_flaring_co2: d.share_global_flaring_co2,
+    share_global_gas_co2: d.share_global_gas_co2,
+    share_global_oil_co2: d.share_global_oil_co2,
+    share_global_other_co2: d.share_global_other_co2,
+    share_global_cumulative_co2: d.share_global_cumulative_co2,
+    share_global_cumulative_cement_co2: d.share_global_cumulative_cement_co2,
+    share_global_cumulative_coal_co2: d.share_global_cumulative_coal_co2,
+    share_global_cumulative_flaring_co2: d.share_global_cumulative_flaring_co2,
+    share_global_cumulative_gas_co2: d.share_global_cumulative_gas_co2,
+    share_global_cumulative_oil_co2: d.share_global_cumulative_oil_co2,
+    share_global_cumulative_other_co2: d.share_global_cumulative_other_co2,
+    total_ghg: d.total_ghg,
+    ghg_per_capita: d.ghg_per_capita,
+    methane: d.methane,
+    methane_per_capita: d.methane_per_capita,
+    nitrous_oxide: d.nitrous_oxide,
+    nitrous_oxide_per_capita: d.nitrous_oxide_per_capita,
+    population: d.population,
+    gdp: d.gdp,
+    primary_energy_consumption: d.primary_energy_consumption,
+    energy_per_capita: d.energy_per_capita,
+    energy_per_gdp: d.energy_per_gdp
+  }
+}

@@ -86,10 +86,10 @@ export const emissionObj = {
     lightTopLine: true,
     lightTextDesc: true,
     // eslint-disable-next-line no-multi-str
-    description: "Human activities like power generation, and transportation by burning fossil fuels \
-                adds large quantities of carbon dioxide in the environment. This plot, shows the annual \
-                global emissions of carbon dioxide (CO2), measured in million tonnes, over the year from burining \
-                of different types of fossil fuels.",
+    description:    "A lot of human activities like power generation, transportation, agriculture, etc add large quantities of carbon dioxide into the atmosphere. \
+                    This plot shows the annual global emission of carbon dioxide (co2), measured in million tonnes, over the years. \
+                    It also shows the specific co2 emission associated with different fossil fuels. \
+                    Note that the plot shows co2 emissions, not total co2 emited.",
     headLine: "CO2 Emissions Continue to Rise",
     lightText: true,
     topLine: 'Cause',
