@@ -41,18 +41,7 @@ const Home = () => {
       <DetailsSection {...supportObj} />
       <Footer />
     </>
-  )/*
-  return (
-    <>
-      <HeroSection {...heroObj} />
-      <InfoSection {...homeObj} />
-      <CardSection />
-      <GraphSection {...homeObjTwo} />
-      <GraphSection {...homeObjThree} />
-      <Footer />
-    </>
-  )*/
-
+  )
 }
 
 export default Home

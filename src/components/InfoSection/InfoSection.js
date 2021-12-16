@@ -10,6 +10,7 @@ import {
     TopLine,
     Heading,
     Subtitle,
+    AddData
 } from './InfoSection.elements';
 
 const InfoSection = ({ 
@@ -21,7 +22,8 @@ const InfoSection = ({
     headLine, 
     lightText, 
     topLine,
-    viz
+    viz,
+    additional
 }) => {
     return (
         <>  
@@ -38,6 +40,9 @@ const InfoSection = ({
                         <InfoColumn>
                             {viz()}
                         </InfoColumn>
+                        <TextWrapper>
+                            <AddData lightTextDesc={lightTextDesc}>{additional}</AddData>
+                        </TextWrapper>
                     </InfoRow>
                 </Container>
             </InfoSec>

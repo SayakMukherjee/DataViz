@@ -93,7 +93,6 @@ const StreamGraph = () => {
 
             // Three function that change the tooltip when user hover / move / leave a cell
             const mouseover = function (event, d) {
-                //Tooltip.style("opacity", 1)
                 Tooltip
                     .style("opacity", 0.8)
                 d3.selectAll(".myArea").style("opacity", .2)

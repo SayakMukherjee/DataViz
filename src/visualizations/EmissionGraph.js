@@ -175,12 +175,10 @@ const EmissionGraph = () => {
         .attr("value", function (d) { return d; })
 
       function updateGraph(option) {
-        console.log("hello! " + option);
         if (option == selectOptions[0]) { currentgraph = 0; }
         if (option == selectOptions[1]) { currentgraph = 1; }
         if (option == selectOptions[2]) { currentgraph = 2; }
         if (option == selectOptions[3]) { currentgraph = 3; }
-        console.log(currentgraph);
         line
           .selectAll('.line')
           .datum(emissionData[currentgraph])

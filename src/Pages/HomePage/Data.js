@@ -40,7 +40,8 @@ export const effectsObj = {
     headLine: 'Rise in Global Temperature',
     lightText: true,
     topLine: 'Effects',
-    viz: GlobalTemperature
+    viz: GlobalTemperature,
+    additional: "*DataSource- Ourworldindata"
 };
 
 //Effects
@@ -57,7 +58,8 @@ export const effectsObjTwo = {
     lightText: true,
     topLine: 'Effects',
     viz: DisastersGraph,
-    additional: "*Countries whose disaster data was not available have been deleted from the graph"
+    additional: "*Countries whose disaster data was not available have been deleted from the graph. DataSource: EM-DAT Public"  
+    
 };
 
 //Cause
@@ -102,8 +104,9 @@ export const effortsObj = {
     // eslint-disable-next-line no-multi-str
     description: "Global co-operation is quintessential in addressing climate change, improving lives \
                 and protecting the environment. International co-operations are guided by agreements such as \
-                the Paris Agreement and the UN Convention on Climate Change. Broad categories under \
-                consideration: Cutting Emissions, Adapting to impacts & Financing the adjustments.",
+                the Paris Agreement and the UN Convention on Climate Change. Actions to fight climate change \
+                can be put broadly in following categories: \
+                Cutting Emissions, Adapting to impacts & Financing the adjustments.",
     headLine: 'Global Initiatives to Counter Climate Change',
     lightText: false,
     topLine: '',

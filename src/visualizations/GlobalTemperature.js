@@ -21,14 +21,15 @@ const Wrapper = styled.div`
 
 const GlobalTemperature = () => {
 
+  //Define margins
   useEffect(() => {
     const margin = {
       top: 10, right: 30, bottom: 30, left: 60
     }
-
     const width = 500 - margin.left - margin.right;
     const height = 460 - margin.top - margin.bottom;
 
+    //Create svg object
     const svg = d3.select('#my_dataviz')
       .append("svg")
       .attr("width", width + margin.left + margin.right)
@@ -38,12 +39,10 @@ const GlobalTemperature = () => {
         `translate(${margin.left}, ${margin.top})`);
 
 
-
-
     //Read the data
     d3.csv("https://raw.githubusercontent.com/cashenkes/Data-Visualization-14/main/Temperature_change_cleaned_part.csv",
 
-      // When reading the csv, I must format variables:
+    // When reading the csv, I must format variables:
       d => {
         return { Day: d3.timeParse("%Y")(d.Day), temperature_anomaly: d.temperature_anomaly }
       }).then(
@@ -88,6 +87,7 @@ const GlobalTemperature = () => {
           //Thanks to https://gist.github.com/d3noob/2a27cdf2574e7f5e31a4844057d6b824 for idea on how to loop the animation
           function lineTransition() {
 
+            //Drawing the line graph
             let path = svg
               .append("path")
               .datum(data)
@@ -97,12 +97,11 @@ const GlobalTemperature = () => {
               .attr("d", d3.line()
                 .x(d => x(d.Day))
                 .y(d => y(d.temperature_anomaly))
-                // .x(function(d) { return x(d.x) })
-                // .y(function(d) { return y(d.y) })
               )
             var totalLength = path.node().getTotalLength();
             repeat();
 
+            //Repeat line draw animation
             function repeat() {
               path
                 .attr("stroke-dasharray", totalLength + " " + totalLength)
@@ -118,7 +117,6 @@ const GlobalTemperature = () => {
             };
 
           };
-
 
           // create a tooltip
           const Tooltip = d3.select("#my_dataviz")
@@ -169,8 +167,6 @@ const GlobalTemperature = () => {
             .on("mouseover", mouseover)
             .on("mousemove", mousemove)
             .on("mouseleave", mouseleave)
-
-
 
         });
   }, []);

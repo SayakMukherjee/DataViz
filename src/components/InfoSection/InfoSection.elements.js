@@ -66,6 +66,16 @@ line-height: 24px;
 color: ${({lightTextDesc}) => (lightTextDesc ? '#a9b3c1': '#1c2237')};
 `;
 
+export const AddData = styled.p`
+max-width: 100%;
+padding-top: 20px;
+margin-bottom: 0px;
+font-size: 10px;
+line-height: 24px;
+text-align: right;
+color: ${({ lightTextDesc }) => (lightTextDesc ? '#a9b3c1' : '#1c2237')};
+`;
+
 export const ImgWrapper = styled.div`
 max-width: 555px;
 display: block;

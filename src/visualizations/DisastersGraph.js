@@ -57,8 +57,6 @@ const DisastersGraph = () => {
     const codeData = new Map();
 
 
-
-
     // Load external data and boot
     Promise.all([
       d3.json("https://raw.githubusercontent.com/cashenkes/Data-Visualization-14/main/world.geojson"),
@@ -80,9 +78,9 @@ const DisastersGraph = () => {
         .style("border-radius", "5px")
         .style("padding", "5px")
         .style("position", "absolute")
-
-      const mouseOver = function (event, d) {
-
+    
+    //Define transition and toolTip on mouseOver
+    const mouseOver = function (event, d) {
 
         d3.selectAll(".Country")
           .transition()
@@ -107,8 +105,6 @@ const DisastersGraph = () => {
         }
 
         d.country = codeData.get(d.id);
-
-
         tooltip
           .style("opacity", 0.8)
           .html("<b>" + d.country + "</b><br> Year: " + year + " <br> Disasters: <b>" + d.total() + "</b>")
@@ -116,6 +112,7 @@ const DisastersGraph = () => {
           .style("top", (event.pageY) + "px");
       }
 
+      //Transitions on mouseLeave
       let mouseLeave = function (d) {
         d3.selectAll(".Country")
           .style("opacity", 1)
@@ -139,7 +136,6 @@ const DisastersGraph = () => {
         .attr("d", d3.geoPath()
           .projection(projection)
         )
-
         .style("stroke", "black")
         .style("stroke-width", 0.1)
         .attr("class", function (d) { return "Country" })
@@ -147,7 +143,7 @@ const DisastersGraph = () => {
         .on("mouseover", mouseOver)
         .on("mouseleave", mouseLeave)
 
-
+      //Update map for the selected year
       function update(year) {
         slider.property("value", year);
         d3.select(".year").text(year);
@@ -156,8 +152,7 @@ const DisastersGraph = () => {
             var refinedData = loadData[1].filter(function (k) {
               return k.ISO == d.id && k.Year == year
             })
-
-
+            
             if (refinedData.length > 0) { d.total = refinedData[0].Count }
             else d.total = 0
 
@@ -165,7 +160,7 @@ const DisastersGraph = () => {
           })
       }
 
-
+      //Add slider for user to change year
       var slider = d3.select(".slider")
         .append("input")
         .attr("type", "range")
@@ -180,7 +175,7 @@ const DisastersGraph = () => {
 
       update(2019);
 
-
+      //Add legend for colour coding
       var legend = svg.append("g")
         .attr("id", "legend");
 
