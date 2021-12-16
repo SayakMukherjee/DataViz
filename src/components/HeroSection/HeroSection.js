@@ -1,3 +1,6 @@
+/**
+This file is for creating the header hero component.
+ */
 import React from 'react'
 import { HeroContainer, Video, Heading, Subtitle } from './HeroSection.elements'
 

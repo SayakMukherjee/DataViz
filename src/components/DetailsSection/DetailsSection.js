@@ -1,6 +1,3 @@
-/**
-This file is for creating the graph display component.
- */
 import React from 'react';
 import { Container } from '../../globalStyles';
 import {
@@ -9,20 +6,17 @@ import {
     TopLine,
     Heading,
     Subtitle,
-    VizWrapper,
-    AddData,
-} from './GraphSection.elements';
+    AddData
+} from './DetailsSection.elements'
 
-const GraphSection = ({
+const DetailsSection = ({
     lightBg,
-    imgStart,
     lightTopLine,
     lightTextDesc,
     description,
     headLine,
     lightText,
     topLine,
-    viz,
     additional
 }) => {
     return (
@@ -33,11 +27,6 @@ const GraphSection = ({
                         <TopLine lightTopLine={lightTopLine}>{topLine}</TopLine>
                         <Heading lightText={lightText}>{headLine}</Heading>
                         <Subtitle lightTextDesc={lightTextDesc}>{description}</Subtitle>
-                    </TextWrapper>
-                    <VizWrapper>
-                        {viz()}
-                    </VizWrapper>
-                    <TextWrapper>
                         <AddData lightTextDesc={lightTextDesc}>{additional}</AddData>
                     </TextWrapper>
                 </Container>
@@ -46,4 +35,4 @@ const GraphSection = ({
     )
 }
 
-export default GraphSection
+export default DetailsSection

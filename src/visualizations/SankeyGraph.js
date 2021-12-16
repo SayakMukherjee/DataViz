@@ -1,3 +1,8 @@
+/**
+This file is for plotting the sankey graph
+*
+Reference: https://www.d3-graph-gallery.com/
+ */
 import React, { useEffect } from 'react';
 import * as d3 from "d3";
 import * as d3sankey from "d3-sankey"
@@ -44,7 +49,7 @@ const SankeyGraph = () => {
             .nodePadding(40)
             .size([width, height]);
 
-        const path = sankey.links();
+        //const path = sankey.links();
 
         // load the data
         d3.csv("https://raw.githubusercontent.com/cashenkes/Data-Visualization-14/main/contributions.csv").then(function (data) {
@@ -81,13 +86,7 @@ const SankeyGraph = () => {
             sankeydata.nodes.forEach(function (d, i) {
                 sankeydata.nodes[i] = { "name": d };
             });
-            console.log(sankeydata);
             const graph = sankey(sankeydata);
-
-            const hover = function (event, d) {
-                link.style("stroke-opacity", 0.9);
-                console.log("Yupp");
-            }
 
             // add in the links
             const link = svg.append("g").selectAll(".link")

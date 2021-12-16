@@ -1,3 +1,8 @@
+/**
+This file is for plotting the stream graph
+*
+Reference: https://www.d3-graph-gallery.com/
+ */
 import React, { useEffect } from 'react';
 import * as d3 from "d3";
 import styled from 'styled-components';
@@ -33,27 +38,11 @@ const StreamGraph = () => {
             .attr("transform",
                 `translate(${margin.left}, ${margin.top})`);
 
-        // set the dimensions and margins of the graph
-        // const margin = { top: 20, right: 30, bottom: 0, left: 10 },
-        //     width = 460 - margin.left - margin.right,
-        //     height = 400 - margin.top - margin.bottom;
-
-        // append the svg object to the body of the page
-        // const svg = d3.select("#my_dataviz4")
-        //     .append("svg")
-        //     .attr("width", width + margin.left + margin.right)
-        //     .attr("height", height + margin.top + margin.bottom)
-        //     .append("g")
-        //     .attr("transform",
-        //         `translate(${margin.left}, ${margin.top})`);
-
         // Parse the Data
         d3.csv("https://raw.githubusercontent.com/cashenkes/Data-Visualization-14/main/topicsCOP.csv").then(function (data) {
 
             // List of groups = header of the csv files
-            const keys = data.columns.slice(1)
-
-            console.log(data);
+            const keys = data.columns.slice(1);
 
             // Add X axis
             const x = d3.scaleLinear()
@@ -83,20 +72,12 @@ const StreamGraph = () => {
             const color = d3.scaleOrdinal()
                 .domain(keys)
                 .range(["#fff7bc", "#fee391", "#fec44f", "#fe9929", "#ec7014", "#cc4c02", "#993404", "#662506"]);
-            console.log(d3.schemeDark2)
+
             //stack the data?
             const stackedData = d3.stack()
                 .offset(d3.stackOffsetSilhouette)
                 .keys(keys)
                 (data)
-
-            // create a tooltip
-            // const Tooltip = d3.select('#my_dataviz4')
-            //     .append("text")
-            //     .attr("x", 0)
-            //     .attr("y", 0)
-            //     .style("opacity", 0)
-            //     .style("font-size", 17)
 
             const Tooltip = d3.select('#my_dataviz4').append("div")
                 .style("opacity", 0)
@@ -122,10 +103,9 @@ const StreamGraph = () => {
             }
             const mousemove = function (event, d, i) {
                 const grp = d.key
-                Tooltip.html("<b>" + grp + "</b>")
+                Tooltip.text(grp)
                     .style("left", (event.pageX) + "px")
                     .style("top", (event.pageY) + "px");
-                //Tooltip.text(grp)
             }
             const mouseleave = function (event, d) {
                 Tooltip.style("opacity", 0)

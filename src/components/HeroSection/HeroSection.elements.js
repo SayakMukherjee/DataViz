@@ -1,3 +1,6 @@
+/**
+This file is for styling components of hero section.
+ */
 import styled from "styled-components";
 
 export const HeroContainer = styled.div`

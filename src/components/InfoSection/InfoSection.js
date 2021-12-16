@@ -1,3 +1,6 @@
+/**
+This file is for creating the information and graph display component.
+ */
 import React from 'react';
 import { Container } from '../../globalStyles';
 import {

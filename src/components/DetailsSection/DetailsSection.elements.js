@@ -1,29 +1,18 @@
 /**
-This file is for styling components of graph section.
+This file is for styling components of details section.
  */
 import styled from "styled-components";
 
 export const InfoSec = styled.div`
 color: #fff;
-padding: 160px 0;
+padding: 60px 0;
 background: ${({ lightBg }) => (lightBg ? '#80847E' : '#252B2F')};
-`;
-
-export const VizWrapper = styled.div`
-padding-right: 0;
-margin: 0 -15px -15px -15px;
-border: 0;
-max-width: 100%;
-height: 100%;
-vertical-align: middle;
-justify-content: middle;
-display: flex;
 `;
 
 export const TextWrapper = styled.div`
 max-width: 100%;
 padding-top: 0;
-padding-bottom: 10px;
+padding-bottom: 0px;
 text-align: center;
 
 @media screen and (max-width: 768px) {
@@ -47,7 +36,6 @@ color: ${({ lightText }) => (lightText ? '#D99056' : '#252B2F')};
 `;
 
 export const Subtitle = styled.p`
-max-width: 100%;
 margin-bottom: 35px;
 font-size: 18px;
 line-height: 24px;
@@ -56,9 +44,8 @@ color: ${({ lightTextDesc }) => (lightTextDesc ? '#a9b3c1' : '#1c2237')};
 
 export const AddData = styled.p`
 max-width: 100%;
-padding-top: 20px;
-margin-bottom: 0px;
-font-size: 10px;
+margin-bottom: 35px;
+font-size: 12px;
 line-height: 24px;
 text-align: right;
 color: ${({ lightTextDesc }) => (lightTextDesc ? '#a9b3c1' : '#1c2237')};

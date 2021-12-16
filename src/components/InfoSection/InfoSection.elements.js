@@ -1,3 +1,6 @@
+/**
+This file is for styling components of information section.
+ */
 import styled from "styled-components";
 
 export const InfoSec = styled.div`

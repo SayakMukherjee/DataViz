@@ -1,26 +1,47 @@
+/**
+This file is for creating the structure of the webpage.
+ */
 import React from 'react'
-import { heroObj, homeObj, homeObjThree, homeObjTwo, emissionObj, streamObj} from './Data'
-import { 
-  HeroSection, 
-  InfoSection, 
+import {
+  heroObj,
+  introObj,
+  effectsObj,
+  effectsObjTwo,
+  causeObj,
+  emissionObj,
+  effortsObj,
+  effortsObjTwo,
+  effortsObjThree,
+  effortsObjFour,
+  supportObj
+} from './Data'
+import {
+  HeroSection,
+  InfoSection,
   Footer,
   GraphSection,
-  CardSection } from '../../components';
+  CardSection,
+  DetailsSection,
+} from '../../components';
 
 const Home = () => {
-    return (
-        <>
-          <HeroSection {...heroObj}/>
-          <InfoSection {...homeObj} />
-          <CardSection/>
-          <GraphSection {...homeObjTwo} />
-          <InfoSection {...emissionObj} />
-          <InfoSection {...streamObj} />
-          <GraphSection {...homeObjThree} />
-          
-          <Footer/>
-        </>
-    )/*
+  return (
+    <>
+      <HeroSection {...heroObj} />
+      <DetailsSection {...introObj} />
+      <InfoSection {...effectsObj} />
+      <CardSection />
+      <GraphSection {...effectsObjTwo} />
+      <DetailsSection {...causeObj} />
+      <InfoSection {...emissionObj} />
+      <DetailsSection {...effortsObj} />
+      <InfoSection {...effortsObjTwo} />
+      <InfoSection {...effortsObjThree} />
+      <GraphSection {...effortsObjFour} />
+      <DetailsSection {...supportObj} />
+      <Footer />
+    </>
+  )/*
   return (
     <>
       <HeroSection {...heroObj} />

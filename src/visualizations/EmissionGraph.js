@@ -1,9 +1,13 @@
+/**
+This file is for plotting the line graph
+*
+Reference: https://www.d3-graph-gallery.com/
+ */
 import React, { useEffect } from 'react';
-//import { Button } from 'react-native'
 import * as d3 from "d3";
 import styled from 'styled-components';
 
-const link = "https://raw.githubusercontent.com/cashenkes/Data-Visualization-14/main/co2-em.csv?token=AC4QHJRH7YZZU2WCTTOUU4TBYHVNK"
+const link = "https://raw.githubusercontent.com/cashenkes/Data-Visualization-14/main/co2-em.csv"
 
 const Wrapper = styled.div`
     height: 100%;
@@ -12,7 +16,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: inset 0 0 0 1000px #80847E;
+    box-shadow: inset 0 0 0 1000px #252B2F;
     object-fit: contain;
     padding: 2px;
 `;
@@ -21,17 +25,17 @@ const Select = styled.select`
   width: 20%;
   height: 35px;
   background: #252B2F;
-  color: #80847E;
+  color: #D99056;
   padding-left: 5px;
   font-size: 14px;
   border-left: none;
   border-top:none;
   border-right:none;
-  border-color: #80847E;
+  border-color: #D99056;
   margin-left: 10px;
 
   option {
-    color: #80847E;
+    color: #D99056;
     background: #252B2F;
     display: flex;
     white-space: pre;
@@ -195,19 +199,15 @@ const EmissionGraph = () => {
       const xAxis = svg.append("g")
         .attr("transform", `translate(0, ${height})`)
         .call(d3.axisBottom(xScale))
-        .attr("color", "#252B2F")
-        .attr("stroke", "#252B2F")
-        .attr("stroke-width", 1);
+        .attr("color", "#fff");
 
       // Add X axis label:
       svg.append("text")
         .attr("text-anchor", "end")
         .attr("x", width + 15)
         .attr("y", height + margin.top + 25)
-        .attr("fill", "#252B2F")
-        .text("Year")
-        .attr("stroke", "#252B2F")
-        .attr("stroke-width", 1);
+        .attr("fill", "#fff")
+        .text("Year");
 
       // Add Y axis
       const yScale = d3.scaleLinear()
@@ -215,9 +215,7 @@ const EmissionGraph = () => {
         .range([height, 0]);
       svg.append("g")
         .call(d3.axisLeft(yScale))
-        .attr("color", "#252B2F")
-        .attr("stroke", "#252B2F")
-        .attr("stroke-width", 1);
+        .attr("color", "#fff");
 
       // Y axis label:
       svg.append("text")
@@ -226,9 +224,7 @@ const EmissionGraph = () => {
         .attr("x", -margin.top + 73)
         .attr("font-size", 11)
         .text("* 10E+9 kg")
-        .attr("fill", "#252B2F")
-        .attr("stroke", "#252B2F")
-        .attr("stroke-width", 1);
+        .attr("fill", "#fff");
 
       const clip = svg.append("defs").append("svg:clipPath")
         .attr("id", "clip")
@@ -250,7 +246,7 @@ const EmissionGraph = () => {
         .datum(emissionData[currentgraph])
         .attr("class", "line")
         .attr("fill", "none")
-        .attr("stroke", "#252B2F")
+        .attr("stroke", "#D99056")
         .attr("stroke-width", 2)
         .attr("d", d3.line()
           .x((d) => xScale(d3.timeParse("%Y")(d[0])))
