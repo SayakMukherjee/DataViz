@@ -1,14 +1,14 @@
 /**
 * This file plots a linegraph representing global co2 emission per year.
-*
-* Inspiration for the basic setup of a linechart using d3 was taken from: https://www.d3-graph-gallery.com/line.html
+* Inspiration for the base setup of a linechart using d3 was taken from :  https://www.d3-graph-gallery.com/line.html
 */
 import React, { useEffect } from 'react';
 import * as d3 from "d3";
 import styled from 'styled-components';
 
 // the resource where the dataset is located.
-// A codebook containing explanation for the dataset can be found here: https://github.com/owid/co2-data/blob/master/owid-co2-codebook.csv
+// A link to the datasource can be found here :                             https://github.com/owid/co2-data
+// A codebook containing explanation for the dataset can be found here :    https://github.com/owid/co2-data/blob/master/owid-co2-codebook.csv
 const link = "https://raw.githubusercontent.com/cashenkes/Data-Visualization-14/main/co2-em.csv"
 
 const Wrapper = styled.div`
@@ -228,6 +228,8 @@ const EmissionGraph = () => {
                   break;
                 case "oil" :
                   total += Number(e2.oil_co2)
+                  break;
+                default :
                   break;
               }
             })
