@@ -13,20 +13,20 @@ import {
     AddData
 } from './InfoSection.elements';
 
-const InfoSection = ({ 
-    lightBg, 
-    imgStart, 
-    lightTopLine, 
+const InfoSection = ({
+    lightBg,
+    imgStart,
+    lightTopLine,
     lightTextDesc,
     description,
-    headLine, 
-    lightText, 
+    headLine,
+    lightText,
     topLine,
     viz,
     additional
 }) => {
     return (
-        <>  
+        <>
             <InfoSec lightBg={lightBg}>
                 <Container>
                     <InfoRow imgStart={imgStart}>
@@ -39,10 +39,11 @@ const InfoSection = ({
                         </InfoColumn>
                         <InfoColumn>
                             {viz()}
+                            <TextWrapper>
+                                <AddData lightTextDesc={lightTextDesc}>{additional}</AddData>
+                            </TextWrapper>
                         </InfoColumn>
-                        <TextWrapper>
-                            <AddData lightTextDesc={lightTextDesc}>{additional}</AddData>
-                        </TextWrapper>
+
                     </InfoRow>
                 </Container>
             </InfoSec>

@@ -41,7 +41,7 @@ export const effectsObj = {
     lightText: true,
     topLine: 'Effects',
     viz: GlobalTemperature,
-    additional: "*DataSource- Ourworldindata"
+    additional: "- Source: Ourworldindata"
 };
 
 //Effects
@@ -58,8 +58,8 @@ export const effectsObjTwo = {
     lightText: true,
     topLine: 'Effects',
     viz: DisastersGraph,
-    additional: "*Countries whose disaster data was not available have been deleted from the graph. DataSource: EM-DAT Public"  
-    
+    additional: "*Countries whose disaster data was not available have been deleted from the graph. Source: EM-DAT Public"
+
 };
 
 //Cause
@@ -125,7 +125,9 @@ export const effortsObjTwo = {
     headLine: 'Conference of Parties (COP)',
     lightText: true,
     topLine: 'Global Initiatives',
-    viz: StreamGraph
+    viz: StreamGraph,
+    additional: "- Source: COP Conference Reports"
+
 };
 
 export const effortsObjThree = {
@@ -142,7 +144,8 @@ export const effortsObjThree = {
     headLine: 'Adaptation & Mitigation Funds',
     lightText: false,
     topLine: 'Global Initiatives',
-    viz: TreeMapGraph
+    viz: TreeMapGraph,
+    additional: "- Source: Climate Fund Update"
 };
 
 export const effortsObjFour = {
@@ -160,7 +163,7 @@ export const effortsObjFour = {
     lightText: true,
     topLine: 'Global Initiatives',
     viz: SankeyGraph,
-    additional: ""
+    additional: "- Source: Climate Fund Update"
 };
 
 // Individual Efforts
