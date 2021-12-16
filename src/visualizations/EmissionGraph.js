@@ -50,7 +50,7 @@ const EmissionGraph = () => {
   useEffect(() => {
     const margin = { top: 10, right: 30, bottom: 30, left: 60 }
     const width = 500 - margin.left - margin.right;
-    const height = 460 - margin.top - margin.bottom;
+    const height = 560 - margin.top - margin.bottom;
 
     const svg = d3.select('#co2emission')
       .append("svg")
@@ -89,6 +89,7 @@ const EmissionGraph = () => {
       const xAxis = svg.append("g")
         .attr("transform", `translate(0, ${height})`)
         .call(d3.axisBottom(xScale))
+        .attr("font-size", 11)
         .attr("color", "#fff");
 
       // Add X axis label:
@@ -105,15 +106,16 @@ const EmissionGraph = () => {
         .range([height, 0]);
       svg.append("g")
         .call(d3.axisLeft(yScale))
+        .attr("font-size", 11)
         .attr("color", "#fff");
 
       // Y axis label:
       svg.append("text")
         .attr("text-anchor", "end")
         .attr("y", -margin.left + 66)
-        .attr("x", -margin.top + 73)
+        .attr("x", -margin.top + 95)
         .attr("font-size", 11)
-        .text("* 10E+9 kg")
+        .text("In million tonnes")
         .attr("fill", "#fff");
 
       // Adds the clip to the svg.

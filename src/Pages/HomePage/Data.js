@@ -23,7 +23,7 @@ export const introObj = {
     headLine: 'What is Climate Change?',
     lightText: false,
     topLine: '',
-    additional: "- Source: United Nations Climate Action"
+    additional: "*Source: United Nations Climate Action"
 };
 
 // Effects 
@@ -41,7 +41,7 @@ export const effectsObj = {
     lightText: true,
     topLine: 'Effects',
     viz: GlobalTemperature,
-    additional: "- Source: Ourworldindata"
+    additional: "*Source: Ourworldindata"
 };
 
 //Effects
@@ -76,7 +76,7 @@ export const causeObj = {
     headLine: 'What is causing Climate Change?',
     lightText: false,
     topLine: '',
-    additional: "- Source: Udara et al. Global Research on Carbon Emissions: A Scientometric Review. Sustainability. 2019"
+    additional: "*Source: Udara et al. Global Research on Carbon Emissions: A Scientometric Review. Sustainability. 2019"
 };
 
 // Carbon Dioxide emissions
@@ -93,7 +93,8 @@ export const emissionObj = {
     headLine: "CO2 Emissions Continue to Rise",
     lightText: true,
     topLine: 'Cause',
-    viz: EmissionGraph
+    viz: EmissionGraph,
+    additional: "*Source: Global Carbon Budget 2021 https://www.icos-cp.eu/science-and-impact/global-carbon-budget/2021"
 };
 
 // Global efforts to counter climate change
@@ -110,7 +111,7 @@ export const effortsObj = {
     headLine: 'Global Initiatives to Counter Climate Change',
     lightText: false,
     topLine: '',
-    additional: "- Source: United Nations Climate Action"
+    additional: "*Source: United Nations Climate Action"
 };
 
 export const effortsObjTwo = {
@@ -126,7 +127,7 @@ export const effortsObjTwo = {
     lightText: true,
     topLine: 'Global Initiatives',
     viz: StreamGraph,
-    additional: "- Source: COP Conference Reports"
+    additional: "*Source: COP Conference Reports"
 
 };
 
@@ -145,7 +146,7 @@ export const effortsObjThree = {
     lightText: false,
     topLine: 'Global Initiatives',
     viz: TreeMapGraph,
-    additional: "- Source: Climate Fund Update"
+    additional: "*Source: Climate Fund Update"
 };
 
 export const effortsObjFour = {
@@ -163,7 +164,7 @@ export const effortsObjFour = {
     lightText: true,
     topLine: 'Global Initiatives',
     viz: SankeyGraph,
-    additional: "- Source: Climate Fund Update"
+    additional: "*Source: Climate Fund Update"
 };
 
 // Individual Efforts
@@ -181,5 +182,5 @@ export const supportObj = {
     headLine: 'Concluding Thoughts',
     lightText: false,
     topLine: '',
-    additional: "- Source: United Nations Act Now"
+    additional: "*Source: United Nations Act Now"
 };
