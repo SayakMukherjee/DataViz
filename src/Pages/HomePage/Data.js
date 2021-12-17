@@ -17,7 +17,7 @@ export const introObj = {
     lightTopLine: false,
     lightTextDesc: false,
     // eslint-disable-next-line no-multi-str
-    description: "Long-term shift in temperatures and weather patterns is called climate changed.\
+    description: "Long-term shift in temperatures and weather patterns is called climate change.\
                 Natural events such as solar cycles can result in climate change. However, since the 1880s human actions \
                 such as burning of fossil fuels have been the primary reason for drastic changes in the climate.",
     headLine: 'What is Climate Change?',
