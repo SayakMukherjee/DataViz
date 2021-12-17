@@ -8,6 +8,7 @@ Contributors:
 * [Casper Henkes](https://github.com/cashenkes)
 
 The project is hosted on GitHub pages and can be accessed [here](https://sayakmukherjee.github.io/DataViz/).
+The data used in this project can be accessed [here](https://github.com/cashenkes/Data-Visualization-14).
 
 ## Running in local system
 - Install npm on local system
